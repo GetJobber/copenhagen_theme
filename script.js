@@ -359,10 +359,13 @@ var redirects = {
 var oldIds = Object.keys(redirects);
 var newIds = Object.values(redirects);
 
-for (var i = 0; i < oldIds.length; i++){
-  if (window.location.href.indexOf(oldIds[i]) > -1) {
-    window.location.href = 'https://help.getjobber.com/hc/en-us/articles/' + newIds[i]; 
-  }
+// Split off the current article ID from the rest of the URL to look-up the appropriate redirect.
+let [ pageSlug ] = window.location.href.split('/').slice(-1);   // e.g.: "14537623807127-How-to-Subscribe"
+let [ pageId ] = pageSlug.split('-');                           // e.g.: "14537623807127"
+
+// If we have a redirect for this article ID in the hash, let's perform the redirect.
+if (redirects[pageId]) {
+  window.location.href = `https://help.getjobber.com/hc/en-us/articles/${redirects[pageId]}`;
 }
 
 //billing redirect

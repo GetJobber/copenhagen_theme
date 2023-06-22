@@ -364,7 +364,7 @@ let [ pageSlug ] = window.location.href.split('/').slice(-1);   // e.g.: "145376
 let [ pageId ] = pageSlug.split('-');                           // e.g.: "14537623807127"
 
 // If we have a redirect for this article ID in the hash, let's perform the redirect.
-if (redirects[pageId]) {
+if (pageId && redirects[pageId]) {
   window.location.href = `https://help.getjobber.com/hc/en-us/articles/${redirects[pageId]}`;
 }
 

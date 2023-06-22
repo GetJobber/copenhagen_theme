@@ -336,13 +336,36 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
+var redirects = {
+  "360019766773": "360056046054",
+  "115009518827": "7061327071639",
+  "115009727208": "8196953752855",
+  "360021265374": "7448087796631",
+  "360007324274": "8195739126039",
+  "115009727668": "7760313735575",
+  "115009560387": "8185260991127",
+  "115011697807": "8196925335575",
+  "360046288634": "8196961124887",
+  "115009519087": "7447835963159",
+  "360033659193": "8185260991127",
+  "115009730468": "8508884808599",
+  "115009560687": "7447924360855",
+  "115009730148": "8354601698583",
+  "360042930793": "7453632138391",
+  "8420210943767": "7061327071639"
+}
+
 // redirects
-var oldIds = ["360019766773", "115009518827",   "115009727208",   "360021265374",   "360007324274",   "115009727668",   "115009560387",   "115011697807",   "360046288634",   "115009519087",   "360033659193",   "115009730468",   "115009560687",   "115009730148",   "360042930793",   "8420210943767"];
-var newIds = ["360056046054", "7061327071639",  "8196953752855",  "7448087796631",  "8195739126039",  "7760313735575",  "8185260991127",  "8196925335575",  "8196961124887",  "7447835963159",  "8185260991127",  "8508884808599",  "7447924360855",  "8354601698583",  "7453632138391",  "7061327071639"];
-for (var i = 0; i < oldIds.length; i++){
-  if (window.location.href.indexOf(oldIds[i]) > -1) {
-    window.location.href = 'https://help.getjobber.com/hc/en-us/articles/' + newIds[i]; 
-  }
+var oldIds = Object.keys(redirects);
+var newIds = Object.values(redirects);
+
+// Split off the current article ID from the rest of the URL to look-up the appropriate redirect.
+let [ pageSlug ] = window.location.href.split('/').slice(-1);   // e.g.: "14537623807127-How-to-Subscribe"
+let [ pageId ] = pageSlug.split('-');                           // e.g.: "14537623807127"
+
+// If we have a redirect for this article ID in the hash, let's perform the redirect.
+if (pageId && redirects[pageId]) {
+  window.location.href = `https://help.getjobber.com/hc/en-us/articles/${redirects[pageId]}`;
 }
 
 //billing redirect

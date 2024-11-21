@@ -1,6 +1,5 @@
 /* eslint-disable */
 document.addEventListener('DOMContentLoaded', function() {
-  console.log('dev');
   function closest (element, selector) {
     if (Element.prototype.closest) {
       return element.closest(selector);
